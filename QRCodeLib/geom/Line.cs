@@ -5,13 +5,13 @@ namespace ThoughtWorks.QRCode.Geom
 {	
 	public class Line
 	{
-        internal int x1, y1, x2, y2;
+        internal int _x1, _y1, _x2, _y2;
 
 		virtual public bool Horizontal
 		{
 			get
 			{
-				if (y1 == y2)
+				if (_y1 == _y2)
 					return true;
 				else
 					return false;
@@ -22,7 +22,7 @@ namespace ThoughtWorks.QRCode.Geom
 		{
 			get
 			{
-				if (x1 == x2)
+				if (_x1 == _x2)
 					return true;
 				else
 					return false;
@@ -33,8 +33,8 @@ namespace ThoughtWorks.QRCode.Geom
 		{
 			get
 			{
-				int x = (x1 + x2) / 2;
-				int y = (y1 + y2) / 2;
+				int x = (_x1 + _x2) / 2;
+				int y = (_y1 + _y2) / 2;
 				return new Point(x, y);
 			}
 			
@@ -43,8 +43,8 @@ namespace ThoughtWorks.QRCode.Geom
 		{
 			get
 			{
-				int x = System.Math.Abs(x2 - x1);
-				int y = System.Math.Abs(y2 - y1);
+				int x = System.Math.Abs(_x2 - _x1);
+				int y = System.Math.Abs(_y2 - _y1);
 				int r = QRCodeUtility.sqrt(x * x + y * y);
 				return r;
 			}
@@ -53,67 +53,67 @@ namespace ThoughtWorks.QRCode.Geom
 		
 		public Line()
 		{
-			x1 = y1 = x2 = y2 = 0;
+			_x1 = _y1 = _x2 = _y2 = 0;
 		}
 
 		public Line(int x1, int y1, int x2, int y2)
 		{
-			this.x1 = x1;
-			this.y1 = y1;
-			this.x2 = x2;
-			this.y2 = y2;
+			this._x1 = x1;
+			this._y1 = y1;
+			this._x2 = x2;
+			this._y2 = y2;
 		}
 		public Line(Point p1, Point p2)
 		{
-			x1 = p1.X;
-			y1 = p1.Y;
-			x2 = p2.X;
-			y2 = p2.Y;
+			_x1 = p1.X;
+			_y1 = p1.Y;
+			_x2 = p2.X;
+			_y2 = p2.Y;
 		}
 		public virtual Point getP1()
 		{
-			return new Point(x1, y1);
+			return new Point(_x1, _y1);
 		}
 		
 		public virtual Point getP2()
 		{
-			return new Point(x2, y2);
+			return new Point(_x2, _y2);
 		}
 		
 		public virtual void  setLine(int x1, int y1, int x2, int y2)
 		{
-			this.x1 = x1;
-			this.y1 = y1;
-			this.x2 = x2;
-			this.y2 = y2;
+			this._x1 = x1;
+			this._y1 = y1;
+			this._x2 = x2;
+			this._y2 = y2;
 		}
 		public virtual void  setP1(Point p1)
 		{
-			x1 = p1.X;
-			y1 = p1.Y;
+			_x1 = p1.X;
+			_y1 = p1.Y;
 		}
 		public virtual void  setP1(int x1, int y1)
 		{
-			this.x1 = x1;
-			this.y1 = y1;
+			this._x1 = x1;
+			this._y1 = y1;
 		}
 		public virtual void  setP2(Point p2)
 		{
-			x2 = p2.X;
-			y2 = p2.Y;
+			_x2 = p2.X;
+			_y2 = p2.Y;
 		}
 		public virtual void  setP2(int x2, int y2)
 		{
-			this.x2 = x2;
-			this.y2 = y2;
+			this._x2 = x2;
+			this._y2 = y2;
 		}
 		
 		public virtual void  translate(int dx, int dy)
 		{
-			this.x1 += dx;
-			this.y1 += dy;
-			this.x2 += dx;
-			this.y2 += dy;
+			this._x1 += dx;
+			this._y1 += dy;
+			this._x2 += dx;
+			this._y2 += dy;
 		}
 		
 		//check if two lines are neighboring. allow only 1 dot difference 
@@ -152,9 +152,9 @@ namespace ThoughtWorks.QRCode.Geom
 			}
 			return longestLine;
 		}
-		public override String ToString()
+		public override string ToString()
 		{
-			return "(" + System.Convert.ToString(x1) + "," + System.Convert.ToString(y1) + ")-(" + System.Convert.ToString(x2) + "," + System.Convert.ToString(y2) + ")";
+			return "(" + System.Convert.ToString(_x1) + "," + System.Convert.ToString(_y1) + ")-(" + System.Convert.ToString(_x2) + "," + System.Convert.ToString(_y2) + ")";
 		}
 	}
 }

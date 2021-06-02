@@ -2,7 +2,6 @@ using System;
 
 namespace ThoughtWorks.QRCode.Codec.Util
 {
-
     /// <summary>
     /// Contains conversion support elements such as classes, interfaces and static methods.
     /// </summary>
@@ -142,7 +141,7 @@ namespace ThoughtWorks.QRCode.Codec.Util
         /// </summary>
         /// <param name="sourceString">The string to be converted</param>
         /// <returns>The new array of bytes</returns>
-        public static byte[] ToByteArray(String sourceString)
+        public static byte[] ToByteArray(string sourceString)
         {
             return System.Text.UTF8Encoding.UTF8.GetBytes(sourceString);
         }

@@ -1,22 +1,22 @@
 using System;
 namespace ThoughtWorks.QRCode.ExceptionHandler
 {
-	[Serializable]
-	public class InvalidVersionInfoException:VersionInformationException
-	{
-        internal String message = null;
-		public override String Message
-		{
-			get
-			{
-				return message;
-			}
-			
-		}
-		
-		public InvalidVersionInfoException(String message)
-		{
-			this.message = message;
-		}
-	}
+    [Serializable]
+    public class InvalidVersionInfoException : VersionInformationException
+    {
+        internal string _message = null;
+        public override string Message
+        {
+            get
+            {
+                return _message;
+            }
+
+        }
+
+        public InvalidVersionInfoException(string message)
+        {
+            this._message = message;
+        }
+    }
 }

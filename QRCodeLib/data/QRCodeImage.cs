@@ -2,8 +2,8 @@ using System;
 
 namespace ThoughtWorks.QRCode.Codec.Data
 {
-	public interface QRCodeImage
-	{
+    public interface QRCodeImage
+    {
         int Width
         {
             get;
@@ -15,5 +15,5 @@ namespace ThoughtWorks.QRCode.Codec.Data
 
         }
         int getPixel(int x, int y);
-	}
+    }
 }

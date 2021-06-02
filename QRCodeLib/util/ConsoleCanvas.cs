@@ -7,7 +7,7 @@ namespace ThoughtWorks.QRCode.Codec.Util
     public class ConsoleCanvas : DebugCanvas
     {
 
-        public void println(String str)
+        public void println(string str)
         {
             Console.WriteLine(str);
         }

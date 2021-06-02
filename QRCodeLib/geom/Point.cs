@@ -10,20 +10,20 @@ namespace ThoughtWorks.QRCode.Geom
         public const int LEFT = 4;
         public const int TOP = 8;
 
-        internal int x;
-        internal int y;
+        internal int _x;
+        internal int _y;
 	
 
 		virtual public int X
 		{
 			get
 			{
-				return x;
+				return _x;
 			}
 			
 			set
 			{
-				this.x = value;
+				this._x = value;
 			}
 			
 		}
@@ -31,12 +31,12 @@ namespace ThoughtWorks.QRCode.Geom
 		{
 			get
 			{
-				return y;
+				return _y;
 			}
 			
 			set
 			{
-				this.y = value;
+				this._y = value;
 			}
 			
 		}
@@ -44,30 +44,30 @@ namespace ThoughtWorks.QRCode.Geom
 		
 		public Point()
 		{
-			x = 0;
-			y = 0;
+			_x = 0;
+			_y = 0;
 		}
 		public Point(int x, int y)
 		{
-			this.x = x;
-			this.y = y;
+			this._x = x;
+			this._y = y;
 		}
 		
 		public virtual void  translate(int dx, int dy)
 		{
-			this.x += dx;
-			this.y += dy;
+			this._x += dx;
+			this._y += dy;
 		}
 		
 		public virtual void  set_Renamed(int x, int y)
 		{
-			this.x = x;
-			this.y = y;
+			this._x = x;
+			this._y = y;
 		}
 		
-		public override String ToString()
+		public override string ToString()
 		{
-			return "(" + System.Convert.ToString(x) + "," + System.Convert.ToString(y) + ")";
+			return "(" + System.Convert.ToString(_x) + "," + System.Convert.ToString(_y) + ")";
 		}
 		
 		public static Point getCenter(Point p1, Point p2)
@@ -77,7 +77,7 @@ namespace ThoughtWorks.QRCode.Geom
 		
 		public bool equals(Point compare)
 		{
-			if (x == compare.x && y == compare.y)
+			if (_x == compare._x && _y == compare._y)
 				return true;
 			else
 				return false;
@@ -87,7 +87,7 @@ namespace ThoughtWorks.QRCode.Geom
 		{
 			int x2 = other.X;
 			int y2 = other.Y;
-			return QRCodeUtility.sqrt((x - x2) * (x - x2) + (y - y2) * (y - y2));
+			return QRCodeUtility.sqrt((_x - x2) * (_x - x2) + (_y - y2) * (_y - y2));
 		}
 	}
 }

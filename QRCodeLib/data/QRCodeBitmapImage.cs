@@ -7,7 +7,7 @@ namespace ThoughtWorks.QRCode.Codec.Data
 {
     public class QRCodeBitmapImage : QRCodeImage
     {
-         Bitmap image;
+        Bitmap _image;
 
         /// <summary>
         /// Constructor
@@ -15,14 +15,14 @@ namespace ThoughtWorks.QRCode.Codec.Data
         /// <param name="image">Bitmap image/param>
         public QRCodeBitmapImage(Bitmap image)
         {
-            this.image = image;
+            this._image = image;
         }
 
         virtual public int Width
         {
             get
             {
-                return image.Width;
+                return _image.Width;
             }
 
         }
@@ -30,15 +30,15 @@ namespace ThoughtWorks.QRCode.Codec.Data
         {
             get
             {
-                return image.Height;
+                return _image.Height;
             }
 
         }
-     
+
 
         public virtual int getPixel(int x, int y)
         {
-            return image.GetPixel(x, y).ToArgb();
+            return _image.GetPixel(x, y).ToArgb();
         }
     }
 }

@@ -256,16 +256,17 @@ namespace QRCodeSample
             // 
             // txtEncodeData
             // 
-            this.txtEncodeData.Location = new System.Drawing.Point(132, 210);
+            this.txtEncodeData.Location = new System.Drawing.Point(137, 210);
             this.txtEncodeData.Name = "txtEncodeData";
-            this.txtEncodeData.Size = new System.Drawing.Size(433, 21);
+            this.txtEncodeData.Size = new System.Drawing.Size(428, 21);
             this.txtEncodeData.TabIndex = 2;
             this.txtEncodeData.Text = "ThoughtWorks Interactive Technologies";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 212);
+            this.label1.Font = new System.Drawing.Font("ËÎÌו", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(6, 214);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 12);
             this.label1.TabIndex = 1;

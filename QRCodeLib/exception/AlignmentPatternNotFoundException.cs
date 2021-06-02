@@ -1,22 +1,22 @@
 using System;
 namespace ThoughtWorks.QRCode.ExceptionHandler
 {
-	[Serializable]
-	public class AlignmentPatternNotFoundException:System.ArgumentException
-	{
-        internal String message = null;
+    [Serializable]
+    public class AlignmentPatternNotFoundException : System.ArgumentException
+    {
+        internal string _message = null;
 
-		public override String Message
-		{
-			get
-			{
-				return message;
-			}
-			
-		}		
-		public AlignmentPatternNotFoundException(String message)
-		{
-			this.message = message;
-		}
-	}
+        public override string Message
+        {
+            get
+            {
+                return _message;
+            }
+
+        }
+        public AlignmentPatternNotFoundException(string message)
+        {
+            this._message = message;
+        }
+    }
 }

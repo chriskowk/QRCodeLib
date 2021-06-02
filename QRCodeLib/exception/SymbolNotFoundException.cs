@@ -1,23 +1,23 @@
 using System;
 namespace ThoughtWorks.QRCode.ExceptionHandler
 {
-	[Serializable]
-	public class SymbolNotFoundException:System.ArgumentException
-	{
-        internal String message = null;
+    [Serializable]
+    public class SymbolNotFoundException : System.ArgumentException
+    {
+        internal string _message = null;
 
-		public override String Message
-		{
-			get
-			{
-				return message;
-			}
-			
-		}
-		
-		public SymbolNotFoundException(String message)
-		{
-			this.message = message;
-		}
-	}
+        public override string Message
+        {
+            get
+            {
+                return _message;
+            }
+
+        }
+
+        public SymbolNotFoundException(string message)
+        {
+            this._message = message;
+        }
+    }
 }

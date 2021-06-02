@@ -4,58 +4,58 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 {
 	public class BCH15_5
 	{
-        internal int[][] gf16;
-        internal bool[] recieveData;
-        internal int numCorrectedError;
+        internal int[][] _gf16;
+        internal bool[] _recieveData;
+        internal int _numCorrectedError;
 
 		virtual public int NumCorrectedError
 		{
 			get
 			{
-				return numCorrectedError;
+				return _numCorrectedError;
 			}		
 		}
 		
 		public BCH15_5(bool[] source)
 		{
-			gf16 = createGF16();
-			recieveData = source;
+			_gf16 = createGF16();
+			_recieveData = source;
 		}
 		
 		public virtual bool[] correct()
 		{
-			int[] s = calcSyndrome(recieveData);
+			int[] s = calcSyndrome(_recieveData);
 			
 			int[] errorPos = detectErrorBitPosition(s);
-			bool[] output = correctErrorBit(recieveData, errorPos);
+			bool[] output = correctErrorBit(_recieveData, errorPos);
 			return output;
 		}
 		
 		internal virtual int[][] createGF16()
 		{
-			gf16 = new int[16][];
+			_gf16 = new int[16][];
 			for (int i = 0; i < 16; i++)
 			{
-				gf16[i] = new int[4];
+				_gf16[i] = new int[4];
 			}
 			int[] seed = new int[]{1, 1, 0, 0};
 			for (int i = 0; i < 4; i++)
-				gf16[i][i] = 1;
+				_gf16[i][i] = 1;
 			for (int i = 0; i < 4; i++)
-				gf16[4][i] = seed[i];
+				_gf16[4][i] = seed[i];
 			for (int i = 5; i < 16; i++)
 			{
 				for (int j = 1; j < 4; j++)
 				{
-					gf16[i][j] = gf16[i - 1][j - 1];
+					_gf16[i][j] = _gf16[i - 1][j - 1];
 				}
-				if (gf16[i - 1][3] == 1)
+				if (_gf16[i - 1][3] == 1)
 				{
 					for (int j = 0; j < 4; j++)
-						gf16[i][j] = (gf16[i][j] + seed[j]) % 2;
+						_gf16[i][j] = (_gf16[i][j] + seed[j]) % 2;
 				}
 			}
-			return gf16;
+			return _gf16;
 		}
 		
 		internal virtual int searchElement(int[] x)
@@ -63,7 +63,7 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 			int k;
 			for (k = 0; k < 15; k++)
 			{
-				if (x[0] == gf16[k][0] && x[1] == gf16[k][1] && x[2] == gf16[k][2] && x[3] == gf16[k][3])
+				if (x[0] == _gf16[k][0] && x[1] == _gf16[k][1] && x[2] == _gf16[k][2] && x[3] == _gf16[k][3])
 					break;
 			}
 			return k;
@@ -104,15 +104,15 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 			return f;
 		}
 		
-		internal static String[] bitName = new String[]{"c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "d0", "d1", "d2", "d3", "d4"};
+		internal static string[] bitName = new string[]{"c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "d0", "d1", "d2", "d3", "d4"};
 		
 		internal virtual int addGF(int arg1, int arg2)
 		{
 			int[] p = new int[4];
 			for (int m = 0; m < 4; m++)
 			{
-				int w1 = (arg1 < 0 || arg1 >= 15)?0:gf16[arg1][m];
-				int w2 = (arg2 < 0 || arg2 >= 15)?0:gf16[arg2][m];
+				int w1 = (arg1 < 0 || arg1 >= 15)?0:_gf16[arg1][m];
+				int w2 = (arg2 < 0 || arg2 >= 15)?0:_gf16[arg2][m];
 				p[m] = (w1 + w2) % 2;
 			}
 			return searchElement(p);
@@ -127,7 +127,7 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 			{
 				if (y[k] == true)
 					for (int m = 0; m < 4; m++)
-						p[m] = (p[m] + gf16[k][m]) % 2;
+						p[m] = (p[m] + _gf16[k][m]) % 2;
 			}
 			k = searchElement(p);
 			s[0] = (k >= 15)?- 1:k;
@@ -137,7 +137,7 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 			{
 				if (y[k] == true)
 					for (int m = 0; m < 4; m++)
-						p[m] = (p[m] + gf16[(k * 3) % 15][m]) % 2;
+						p[m] = (p[m] + _gf16[(k * 3) % 15][m]) % 2;
 			}
 			
 			k = searchElement(p);
@@ -148,7 +148,7 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 			{
 				if (y[k] == true)
 					for (int m = 0; m < 4; m++)
-						p[m] = (p[m] + gf16[(k * 5) % 15][m]) % 2;
+						p[m] = (p[m] + _gf16[(k * 5) % 15][m]) % 2;
 			}
 			k = searchElement(p);
 			s[4] = (k >= 15)?- 1:k;		
@@ -161,7 +161,7 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 			int[] e = new int[4];
 			// calc σ1
 			e[0] = s[0];
-			//Console.out.println("σ1 = " + String.valueOf(e[0]));
+			//Console.out.println("σ1 = " + string.valueOf(e[0]));
 			
 			// calc σ2
 			int t = (s[0] + s[1]) % 15;
@@ -231,7 +231,7 @@ namespace ThoughtWorks.QRCode.Codec.Ecc
 			for (int i = 1; i <= errorPos[0]; i++)
 				y[errorPos[i]] = !y[errorPos[i]];
 			
-			numCorrectedError = errorPos[0];
+			_numCorrectedError = errorPos[0];
 			return y;
 		}
 	}

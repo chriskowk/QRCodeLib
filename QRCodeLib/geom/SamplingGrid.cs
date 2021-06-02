@@ -12,9 +12,9 @@ namespace ThoughtWorks.QRCode.Geom
 			get
 			{
 				int total = 0;
-				for (int i = 0; i < grid.Length; i++)
+				for (int i = 0; i < _grid.Length; i++)
 				{
-					total += grid[i][0].Width;
+					total += _grid[i][0].Width;
 					if (i > 0)
 						total -= 1;
 				}
@@ -27,9 +27,9 @@ namespace ThoughtWorks.QRCode.Geom
 			get
 			{
 				int total = 0;
-				for (int i = 0; i < grid[0].Length; i++)
+				for (int i = 0; i < _grid[0].Length; i++)
 				{
-					total += grid[0][i].Height;
+					total += _grid[0][i].Height;
 					if (i > 0)
 						total -= 1;
 				}
@@ -121,70 +121,70 @@ namespace ThoughtWorks.QRCode.Geom
 		}
 		
 		
-		private AreaGrid[][] grid;
+		private AreaGrid[][] _grid;
 		
 		public SamplingGrid(int sqrtNumArea)
 		{
-			grid = new AreaGrid[sqrtNumArea][];
+			_grid = new AreaGrid[sqrtNumArea][];
 			for (int i = 0; i < sqrtNumArea; i++)
 			{
-				grid[i] = new AreaGrid[sqrtNumArea];
+				_grid[i] = new AreaGrid[sqrtNumArea];
 			}
 		}
 		
 		public virtual void  initGrid(int ax, int ay, int width, int height)
 		{
-			grid[ax][ay] = new AreaGrid(this, width, height);
+			_grid[ax][ay] = new AreaGrid(this, width, height);
 		}
 		
 		public virtual void  setXLine(int ax, int ay, int x, Line line)
 		{
-			grid[ax][ay].setXLine(x, line);
+			_grid[ax][ay].setXLine(x, line);
 		}
 		
 		public virtual void  setYLine(int ax, int ay, int y, Line line)
 		{
-			grid[ax][ay].setYLine(y, line);
+			_grid[ax][ay].setYLine(y, line);
 		}
 		
 		public virtual Line getXLine(int ax, int ay, int x)
 		{
-			return (grid[ax][ay].getXLine(x));
+			return (_grid[ax][ay].getXLine(x));
 		}
 		
 		public virtual Line getYLine(int ax, int ay, int y)
 		{
-			return (grid[ax][ay].getYLine(y));
+			return (_grid[ax][ay].getYLine(y));
 		}
 		
 		public virtual Line[] getXLines(int ax, int ay)
 		{
-			return (grid[ax][ay].XLines);
+			return (_grid[ax][ay].XLines);
 		}
 		
 		public virtual Line[] getYLines(int ax, int ay)
 		{
-			return (grid[ax][ay].YLines);
+			return (_grid[ax][ay].YLines);
 		}
 		
 		public virtual int getWidth()
 		{
-			return (grid[0].Length);
+			return (_grid[0].Length);
 		}
 		
 		public virtual int getHeight()
 		{
-			return (grid.Length);
+			return (_grid.Length);
 		}
 		
 		public virtual int getWidth(int ax, int ay)
 		{
-			return (grid[ax][ay].Width);
+			return (_grid[ax][ay].Width);
 		}
 		
 		public virtual int getHeight(int ax, int ay)
 		{
-			return (grid[ax][ay].Height);
+			return (_grid[ax][ay].Height);
 		}
 		
 		
@@ -193,7 +193,7 @@ namespace ThoughtWorks.QRCode.Geom
 			int total = x;
 			for (int i = 0; i < ax; i++)
 			{
-				total += grid[i][0].Width - 1;
+				total += _grid[i][0].Width - 1;
 			}
 			return total;
 		}
@@ -203,7 +203,7 @@ namespace ThoughtWorks.QRCode.Geom
 			int total = y;
 			for (int i = 0; i < ay; i++)
 			{
-				total += grid[0][i].Height - 1;
+				total += _grid[0][i].Height - 1;
 			}
 			return total;
 		}
@@ -211,14 +211,14 @@ namespace ThoughtWorks.QRCode.Geom
 		public virtual void  adjust(Point adjust)
 		{
 			int dx = adjust.X, dy = adjust.Y;
-			for (int ay = 0; ay < grid[0].Length; ay++)
+			for (int ay = 0; ay < _grid[0].Length; ay++)
 			{
-				for (int ax = 0; ax < grid.Length; ax++)
+				for (int ax = 0; ax < _grid.Length; ax++)
 				{
-					for (int i = 0; i < grid[ax][ay].XLines.Length; i++)
-						grid[ax][ay].XLines[i].translate(dx, dy);
-					for (int j = 0; j < grid[ax][ay].YLines.Length; j++)
-						grid[ax][ay].YLines[j].translate(dx, dy);
+					for (int i = 0; i < _grid[ax][ay].XLines.Length; i++)
+						_grid[ax][ay].XLines[i].translate(dx, dy);
+					for (int j = 0; j < _grid[ax][ay].YLines.Length; j++)
+						_grid[ax][ay].YLines[j].translate(dx, dy);
 				}
 			}
 		}
